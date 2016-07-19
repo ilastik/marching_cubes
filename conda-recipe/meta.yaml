@@ -1,0 +1,36 @@
+package:
+    name: marching_cubes
+
+  {% if GIT_DESCRIBE_NUMBER|int == 0 %}
+    version: {{GIT_DESCRIBE_TAG}}
+  {% else %}
+    # If we're using a non-tagged revision, append '.postN' to the version
+    version: {{GIT_DESCRIBE_TAG}}.post{{GIT_DESCRIBE_NUMBER}}
+  {% endif %}
+
+source:
+  path: ../
+
+build:
+  number: 0
+  string: py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
+
+requirements:
+  build:
+    - gcc 4.8.5 # [linux]
+    - gcc 4.8.5 # [osx]
+    - python 2.7*
+
+  run:
+    - libgcc 4.8.5
+    - python {{PY_VER}}*
+    - numpy
+
+test:
+  imports:
+    - marching_cubes
+
+about:
+  home: http://ilastik.org
+  license: Unknown
+  summary: A fast marching cubes implementation in C++ with python bindings.
