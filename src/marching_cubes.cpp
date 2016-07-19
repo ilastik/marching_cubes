@@ -298,6 +298,11 @@ const int TRIANGLE_TABLE[256][16] = {
 	{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }
 };
 
+IdPoint calculateIntersection(size_t x, size_t y, size_t z, size_t edgeNumber);
+size_t edgeId(size_t x, size_t y, size_t z, size_t edgeNumber, size_t xWidth, size_t yWidth);
+void calculateNormals(Mesh& mesh);
+Mesh reindex(PointIdMapping& vertexMapping, std::vector<Triangle>& triangles);
+
 
 Mesh::Mesh(size_t vertexCount, Point* vertices, Point* normals, size_t faceCount, size_t* faces)
 	: vertexCount(vertexCount), vertices(vertices), normals(normals), faceCount(faceCount), faces(faces)
