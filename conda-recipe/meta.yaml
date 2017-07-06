@@ -17,12 +17,9 @@ build:
 
 requirements:
   build:
-    - gcc 4.8.5 # [linux]
-    - gcc 4.8.5 # [osx]
-    - python 2.7*
+    - python >=2.7
 
   run:
-    - libgcc 4.8.5
     - python {{PY_VER}}*
     - numpy
 
