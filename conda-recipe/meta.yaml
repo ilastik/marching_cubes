@@ -17,6 +17,7 @@ build:
 
 requirements:
   build:
+    - cmake
     - python >=2.7
 
   run:
