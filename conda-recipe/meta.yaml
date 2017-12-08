@@ -19,6 +19,7 @@ requirements:
   build:
     - cmake
     - python >=2.7
+    - python {{PY_VER}}*
 
   run:
     - python {{PY_VER}}*
