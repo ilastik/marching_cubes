@@ -80,7 +80,7 @@ namespace marching_cubes
         // // auto face_info = py::buffer_info(mesh.faces, sizeof(size_t), face_format, 2, { mesh.faceCount, 3 }, { sizeof(size_t) * 3, sizeof(size_t) });
         // // auto face_array = py::array(face_info);
 
-        // return std::make_tuple(vertices, normals, faces);
+        return std::make_tuple(vertices, normals, faces);
     }
 
 }
