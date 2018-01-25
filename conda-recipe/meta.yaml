@@ -20,6 +20,9 @@ requirements:
     - cmake
     - python >=2.7
     - python {{PY_VER}}*
+    - numpy 
+    - xtensor
+    - xtensor-python
 
   run:
     - python {{PY_VER}}*
