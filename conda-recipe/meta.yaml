@@ -21,6 +21,7 @@ requirements:
     - python >=2.7
     - python {{PY_VER}}*
     - numpy
+    - pybind11
   run:
     - python {{PY_VER}}*
     - numpy
