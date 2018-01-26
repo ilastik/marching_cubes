@@ -24,6 +24,11 @@ endif()
 
 find_package(OpenMP)
 
+
+find_package(Boost REQUIRED)
+include_directories(${Boost_INCLUDE_DIRS})
+
+
 find_package(pybind11 REQUIRED)
 include_directories(${pybind11_INCLUDE_DIRS})
 

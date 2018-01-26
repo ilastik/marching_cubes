@@ -3,12 +3,18 @@ from numpy import load
 import numpy
 from operator import mul
 from functools import reduce
-
+import time
 try:
     volume = load("test/sample.npy")
 except IOError:
     volume = load("sample.npy")
 
+
+t0 = time.time()
+vertices, normals, faces = march(volume, 0)  # zero smoothing rounds
+smooth_vertices, smooth_normals, faces = march(volume, 4)  # 4 smoothing rounds
+t1 = time.time()
+print("took",t1-t0,'sec')
 
 from pyqtgraph.opengl import GLViewWidget, MeshData
 from pyqtgraph.opengl.items.GLMeshItem import GLMeshItem

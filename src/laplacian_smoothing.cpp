@@ -1,10 +1,15 @@
 #include "laplacian_smoothing.h"
 #include <vector>
-#include <set>
+// #include <set>
+// #include <unordered_set>
 #include <iostream>
 #include <runtime_check.h>
 
-typedef std::vector<std::set<size_t> > Adjacency;
+#include <boost/container/flat_set.hpp>
+
+typedef std::vector<boost::container::flat_set<size_t>> Adjacency;
+//typedef std::vector<std::set<size_t> > Adjacency;
+//typedef std::vector<std::unordered_set<size_t> > Adjacency;
 /**
  * maps each vertex to all its neighbours
  */
