@@ -20,9 +20,7 @@ requirements:
     - cmake
     - python >=2.7
     - python {{PY_VER}}*
-    - numpy 
-
-
+    - numpy
   run:
     - python {{PY_VER}}*
     - numpy
