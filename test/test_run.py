@@ -10,24 +10,6 @@ except IOError:
     volume = load("sample.npy")
 
 
-numpy.random.seed(5)
-
-for i in range(1000):
-    print('set seed to',i)
-    numpy.random.seed(i)
-    shape = [20]*3
-    volume  = numpy.random.randint(2, size=reduce(mul,shape)).reshape(shape)
-
-    while(volume.sum() == 0):
-        volume  = numpy.random.randint(2, size=reduce(mul,shape)).reshape(shape)
-
-
-
-    print(i)
-    vertices, normals, faces = march(volume, 0)  # zero smoothing rounds
-    smooth_vertices, smooth_normals, faces = march(volume, 4)  # 4 smoothing rounds
-
-
 from pyqtgraph.opengl import GLViewWidget, MeshData
 from pyqtgraph.opengl.items.GLMeshItem import GLMeshItem
 
