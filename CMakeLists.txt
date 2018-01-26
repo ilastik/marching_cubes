@@ -22,23 +22,13 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
 endif()
 
 
-
-
-
 find_package(OpenMP)
-
-# find_package(xtensor REQUIRED)
-# include_directories(${xtensor_INCLUDE_DIRS})
-
-# find_package(xtensor-python REQUIRED)
-# include_directories(${xtensor-python_INCLUDE_DIRS})
 
 find_package(pybind11 REQUIRED)
 include_directories(${pybind11_INCLUDE_DIRS})
 
 find_package(NUMPY REQUIRED)
 include_directories(${PYTHON_NUMPY_INCLUDE_DIR})
-
 
 
 if (OPENMP_FOUND)
@@ -91,9 +81,5 @@ SET(PYTHON_MODULE_INSTALL_DIR ${PYTHON_MODULE_INSTALL_DIR}
 # this is the install path relative to CMAKE_INSTALL_PREFIX,
 # use this in INSTALL() commands to get packaging right
 FILE(RELATIVE_PATH PYTHON_MODULE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX} ${PYTHON_MODULE_INSTALL_DIR})
-
-
-
-
 
 install(TARGETS marching_cubes DESTINATION ${PYTHON_MODULE_INSTALL_DIR})
