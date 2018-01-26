@@ -21,7 +21,7 @@ requirements:
     - python >=2.7
     - python {{PY_VER}}*
     - numpy 
-    - xtensor-python >=0.16*
+
 
   run:
     - python {{PY_VER}}*

@@ -34,7 +34,6 @@ cmake ..\
 
 make -j${CPU_COUNT}
 
-# No install step yet.  Copy manually
-#make install
+make install
 
-cp ${SRC_DIR}/build/marching_cubes*.so ${PREFIX}/lib/python${PY_VER}/site-packages/
+#cp ${SRC_DIR}/build/marching_cubes*.so ${PREFIX}/lib/python${PY_VER}/site-packages/

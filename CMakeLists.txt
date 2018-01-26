@@ -12,15 +12,12 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 
 include(CheckCXXCompilerFlag)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-
-# FIXME c++14 checks are broken!?!
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    CHECK_CXX_COMPILER_FLAG("-std=c++14" HAS_CPP14_FLAG)
-    if (HAS_CPP14_FLAG)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    CHECK_CXX_COMPILER_FLAG("-std=c++11" HAS_CPP11_FLAG)
+    if (HAS_CPP11_FLAG)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
     endif()
 endif()
 
@@ -28,13 +25,13 @@ endif()
 
 
 
-#[[find_package(OpenMP)]]
+find_package(OpenMP)
 
-find_package(xtensor REQUIRED)
-include_directories(${xtensor_INCLUDE_DIRS})
+# find_package(xtensor REQUIRED)
+# include_directories(${xtensor_INCLUDE_DIRS})
 
-find_package(xtensor-python REQUIRED)
-include_directories(${xtensor-python_INCLUDE_DIRS})
+# find_package(xtensor-python REQUIRED)
+# include_directories(${xtensor-python_INCLUDE_DIRS})
 
 find_package(pybind11 REQUIRED)
 include_directories(${pybind11_INCLUDE_DIRS})
@@ -44,10 +41,10 @@ include_directories(${PYTHON_NUMPY_INCLUDE_DIR})
 
 
 
-# if (OPENMP_FOUND)
-#     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-#     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-# endif()
+if (OPENMP_FOUND)
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+endif()
 
 
 set(WINDOWS_EXPORT_ALL_SYMBOLS 1)
@@ -62,3 +59,41 @@ pybind11_add_module(marching_cubes
     src/marching_cubes.cpp
     src/laplacian_smoothing.h 
     src/laplacian_smoothing.cpp)
+
+
+
+#################################
+# INSTALL THE PYTHON MODULE
+#################################
+
+IF(NOT DEFINED PYTHON_MODULE_INSTALL_DIR OR PYTHON_MODULE_INSTALL_DIR MATCHES "^$")
+
+
+    execute_process(
+      COMMAND "${PYTHON_EXECUTABLE}" -c "if True:
+        from distutils import sysconfig as sc
+        print(sc.get_python_lib(prefix='', plat_specific=True))"
+      OUTPUT_VARIABLE PYTHON_SITE
+      OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+    execute_process(
+      COMMAND "${PYTHON_EXECUTABLE}" -c "from __future__ import print_function; from distutils.sysconfig import get_python_lib; print(get_python_lib())"
+      OUTPUT_VARIABLE PYTHON_SITE
+      OUTPUT_STRIP_TRAILING_WHITESPACE)
+
+    SET(PYTHON_MODULE_INSTALL_DIR ${PYTHON_SITE})
+
+ENDIF()
+
+SET(PYTHON_MODULE_INSTALL_DIR ${PYTHON_MODULE_INSTALL_DIR}
+    CACHE PATH "where to install the Nifty Python package" FORCE)
+
+# this is the install path relative to CMAKE_INSTALL_PREFIX,
+# use this in INSTALL() commands to get packaging right
+FILE(RELATIVE_PATH PYTHON_MODULE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX} ${PYTHON_MODULE_INSTALL_DIR})
+
+
+
+
+
+install(TARGETS marching_cubes DESTINATION ${PYTHON_MODULE_INSTALL_DIR})
