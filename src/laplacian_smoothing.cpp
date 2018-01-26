@@ -1,7 +1,8 @@
 #include "laplacian_smoothing.h"
 #include <vector>
 #include <set>
-
+#include <iostream>
+#include <runtime_check.h>
 
 typedef std::vector<std::set<size_t> > Adjacency;
 /**
@@ -29,21 +30,32 @@ Adjacency adjacencyList(Mesh& mesh)
 	size_t faceCount = mesh.faceCount;
 	size_t* faces = mesh.faces;
 
-	#pragma omp parallel for
+
+	//#pragma omp parallel for
 	for (int i = 0; i < faceCount * 3; i += 3)
 	{
-		size_t a, b, c;
-		a = mesh.faces[i];
-		b = faces[i + 1];
-		c = faces[i + 2];
-		adjacency[a].insert(b);
-		adjacency[a].insert(c);
-		adjacency[b].insert(a);
-		adjacency[b].insert(c);
-		adjacency[c].insert(a);
-		adjacency[c].insert(b);
-	}
+		//#pragma omp critical
+		{
+			size_t a, b, c;
+			a = mesh.faces[i];
+			b = faces[i + 1];
+			c = faces[i + 2];
 
+			MARCHING_CUBES_CHECK_OP(a,<,adjacency.size(),"");
+			MARCHING_CUBES_CHECK_OP(b,<,adjacency.size(),"");
+			MARCHING_CUBES_CHECK_OP(c,<,adjacency.size(),"");
+
+			//std::cout<<"i"<<i<<" ("<<a<<","<<b<<","<<c<<")\n";
+
+			adjacency[a].insert(b);
+			adjacency[a].insert(c);
+			adjacency[b].insert(a);
+			adjacency[b].insert(c);
+			adjacency[c].insert(a);
+			adjacency[c].insert(b);
+		}
+	}
+	//std::cout<<"adjacency done\n";
 	return adjacency;
 }
 
