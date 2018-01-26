@@ -10,9 +10,12 @@ except IOError:
     volume = load("sample.npy")
 
 
+numpy.random.seed(5)
 
 for i in range(1000):
-    shape = [100]*3
+    print('set seed to',i)
+    numpy.random.seed(i)
+    shape = [20]*3
     volume  = numpy.random.randint(2, size=reduce(mul,shape)).reshape(shape)
 
     while(volume.sum() == 0):
@@ -20,7 +23,7 @@ for i in range(1000):
 
 
 
-    print(volume)
+    print(i)
     vertices, normals, faces = march(volume, 0)  # zero smoothing rounds
     smooth_vertices, smooth_normals, faces = march(volume, 4)  # 4 smoothing rounds
 
