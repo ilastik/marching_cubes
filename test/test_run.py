@@ -1,3 +1,6 @@
+import sys
+sys.path.append("/home/tbeier/bld/ilastikdev/marching_cubes")
+
 from marching_cubes import march
 from numpy import load
 
