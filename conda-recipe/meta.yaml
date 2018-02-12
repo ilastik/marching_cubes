@@ -12,7 +12,7 @@ source:
   path: ../
 
 build:
-  number: 1
+  number: 2
   string: py{{CONDA_PY}}_{{PKG_BUILDNUM}}_g{{GIT_FULL_HASH[:7]}}
 
 requirements:
@@ -32,5 +32,6 @@ test:
 
 about:
   home: http://ilastik.org
-  license: Unknown
+  license: BSD (3-clause)
+  liscense_file: LICENSE
   summary: A fast marching cubes implementation in C++ with python bindings.
