@@ -16,7 +16,7 @@ else
     DYLIB_EXT=so
     CC=gcc
     CXX=g++
-    CXXFLAGS="${CFLAGS} -std=c++11"
+    CXXFLAGS="${CFLAGS} -std=c++11 -D_GLIBCXX_USE_CXX11_ABI=0"
 fi
 
 mkdir build
