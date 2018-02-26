@@ -21,12 +21,12 @@ requirements:
     - python >=2.7
     - python {{PY_VER}}*
     - boost 1.63.0.*
-    - numpy
+    - numpy {{NPY_VER}}*
     - pybind11
   run:
     - python {{PY_VER}}*
     - boost 1.63.0.*
-    - numpy
+    - numpy {{NPY_VER}}*
 
 test:
   imports:
