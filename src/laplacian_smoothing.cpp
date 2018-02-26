@@ -45,11 +45,6 @@ Adjacency adjacencyList(Mesh& mesh)
 			a = mesh.faces[i];
 			b = faces[i + 1];
 			c = faces[i + 2];
-
-			MARCHING_CUBES_CHECK_OP(a,<,adjacency.size(),"");
-			MARCHING_CUBES_CHECK_OP(b,<,adjacency.size(),"");
-			MARCHING_CUBES_CHECK_OP(c,<,adjacency.size(),"");
-
 			//std::cout<<"i"<<i<<" ("<<a<<","<<b<<","<<c<<")\n";
 
 			adjacency[a].insert(b);
