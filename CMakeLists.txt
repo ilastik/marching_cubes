@@ -32,9 +32,6 @@ include_directories(${Boost_INCLUDE_DIRS})
 find_package(pybind11 REQUIRED)
 include_directories(${pybind11_INCLUDE_DIRS})
 
-find_package(NUMPY REQUIRED)
-include_directories(${PYTHON_NUMPY_INCLUDE_DIR})
-
 
 if (OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
@@ -48,11 +45,11 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS 1)
 
 include_directories(src)
 
-pybind11_add_module(marching_cubes 
+pybind11_add_module(marching_cubes
     src/python_wrapper.cpp
-    src/marching_cubes.h 
+    src/marching_cubes.h
     src/marching_cubes.cpp
-    src/laplacian_smoothing.h 
+    src/laplacian_smoothing.h
     src/laplacian_smoothing.cpp)
 
 
