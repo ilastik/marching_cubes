@@ -20,11 +20,13 @@ requirements:
     - cmake
     - python >=2.7
     - python {{PY_VER}}*
-    - numpy
+    - boost 1.63.0.*
+    - numpy {{NPY_VER}}*
     - pybind11
   run:
     - python {{PY_VER}}*
-    - numpy
+    - boost 1.63.0.*
+    - numpy {{NPY_VER}}*
 
 test:
   imports:
