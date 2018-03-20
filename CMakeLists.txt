@@ -13,16 +13,6 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
     endif()
 endif()
 
-# Configure which abi to use (on linux)
-option(BUILD_WITH_GLIBCXX_CXX11_ABI "Use stdlibcxx11, for gcc >= 5, disable for gcc < 5" ON)
-
-if(BUILD_WITH_GLIBCXX_CXX11_ABI)
-    ADD_DEFINITIONS(-D_GLIBCXX_USE_CXX11_ABI=1)
-else()
-    # Use old ABI, for compatibility with GCC < 5
-    ADD_DEFINITIONS(-D_GLIBCXX_USE_CXX11_ABI=0)
-endif()
-
 find_package(OpenMP)
 
 

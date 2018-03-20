@@ -34,7 +34,6 @@ cmake ..\
     -DPYTHON_EXECUTABLE=${PYTHON} \
     -DPYTHON_LIBRARY=${PREFIX}/lib/libpython${PY_ABI}.${DYLIB_EXT} \
     -DPYTHON_INCLUDE_DIR=${PREFIX}/include/python${PY_ABI} \
-    ${CXX_ABI_ARGS} \
 ##
 
 make -j${CPU_COUNT}
