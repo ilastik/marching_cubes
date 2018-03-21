@@ -17,6 +17,10 @@ else
     CC=gcc
     CXX=g++
     CXXFLAGS="${CFLAGS} -std=c++11"
+    # enable compilation without CXX abi to stay compatible with gcc < 5 built packages
+    if [[ ${DO_NOT_BUILD_WITH_CXX11_ABI} == '1' ]]; then
+        CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=0 ${CXXFLAGS}"
+    fi
 fi
 
 mkdir build
