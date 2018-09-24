@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(marching_cubes)
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
-
 
 include(CheckCXXCompilerFlag)
 set(CMAKE_CXX_STANDARD 11)
