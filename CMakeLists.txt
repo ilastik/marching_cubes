@@ -16,7 +16,7 @@ endif()
 find_package(OpenMP)
 
 
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED container)
 include_directories(${Boost_INCLUDE_DIRS})
 
 

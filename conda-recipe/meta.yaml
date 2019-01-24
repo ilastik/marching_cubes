@@ -14,22 +14,18 @@ source:
 build:
   number: 0
   string: py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
-  script_env:
-    # Control building with CXX11 abi
-    - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
 
 requirements:
   build:
     - cmake
-    - python >=2.7
+    - {{ compiler("cxx") }}
+  host:
     - python {{ python }}
     - boost {{ boost }}
     - pybind11
   run:
     - python
     - boost
-    # in order to suppor older linux distros after gcc5 switch:
-    - libstdcxx-ng >={{ libstdcxxng }}  # [linux]
     - numpy
 
 test:

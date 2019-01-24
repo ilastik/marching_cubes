@@ -1,7 +1,5 @@
 boost:
-  - 1.63.0
-libstdcxxng:
-  - 5.4.0
+  - 1.68.0
 python:
   - 3.6
 
