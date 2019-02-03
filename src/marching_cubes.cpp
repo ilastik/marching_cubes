@@ -640,15 +640,18 @@ void calculateNormals(Mesh& mesh)
 		normal[0] = vec1[2] * vec2[1] - vec1[1] * vec2[2];
 		normal[1] = vec1[0] * vec2[2] - vec1[2] * vec2[0];
 		normal[2] = vec1[1] * vec2[0] - vec1[0] * vec2[1];
-		normals[id0][0] += normal[0];
-		normals[id0][1] += normal[1];
-		normals[id0][2] += normal[2];
-		normals[id1][0] += normal[0];
-		normals[id1][1] += normal[1];
-		normals[id1][2] += normal[2];
-		normals[id2][0] += normal[0];
-		normals[id2][1] += normal[1];
-		normals[id2][2] += normal[2];
+		#pragma omp critical
+		{
+			normals[id0][0] += normal[0];
+			normals[id0][1] += normal[1];
+			normals[id0][2] += normal[2];
+			normals[id1][0] += normal[0];
+			normals[id1][1] += normal[1];
+			normals[id1][2] += normal[2];
+			normals[id2][0] += normal[0];
+			normals[id2][1] += normal[1];
+			normals[id2][2] += normal[2];
+		}
 	}
 
 	#pragma omp parallel for
