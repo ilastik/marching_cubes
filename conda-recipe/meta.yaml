@@ -1,43 +1,33 @@
 package:
-    name: marching_cubes
-
-  {% if GIT_DESCRIBE_NUMBER|int == 0 %}
-    version: {{GIT_DESCRIBE_TAG}}
-  {% else %}
-    # If we're using a non-tagged revision, append '.postN' to the version
-    version: {{GIT_DESCRIBE_TAG}}.post{{GIT_DESCRIBE_NUMBER}}
-  {% endif %}
-
-source:
-  path: ../
+  name: cmake_example
+  version: {{ environ.get('GIT_DESCRIBE_TAG', 'dev') }}
 
 build:
-  number: 0
-  string: py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
+  number: {{ environ.get('GIT_DESCRIBE_NUMBER', 0) }}
+  {% if environ.get('GIT_DESCRIBE_NUMBER', '0') == '0' %}string: py{{ environ.get('PY_VER').replace('.', '') }}_0
+  {% else %}string: py{{ environ.get('PY_VER').replace('.', '') }}_{{ environ.get('GIT_BUILD_STR', 'GIT_STUB') }}{% endif %}
   script_env:
-    # Control building with CXX11 abi
-    - DO_NOT_BUILD_WITH_CXX11_ABI  # [linux]
+    - CC
+    - CXX
+
+source:
+  git_url: ../
 
 requirements:
   build:
-    - cmake
-    - python >=2.7
-    - python {{ python }}
-    - boost {{ boost }}
+    - python
+    - setuptools
     - pybind11
+    - cmake
+
   run:
     - python
-    - boost
-    # in order to suppor older linux distros after gcc5 switch:
-    - libstdcxx-ng >={{ libstdcxxng }}  # [linux]
-    - numpy
+    - vs2015_runtime  # [win]
 
 test:
   imports:
-    - marching_cubes
+    - cmake_example
 
 about:
-  home: http://ilastik.org
-  license: BSD (3-clause)
-  liscense_file: LICENSE
-  summary: A fast marching cubes implementation in C++ with python bindings.
+  summary: An example project built with pybind11.
+  license_file: LICENSE
