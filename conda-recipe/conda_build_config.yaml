@@ -1,9 +1,4 @@
 boost:
   - 1.68.0
 python:
-  - 3.6
-
-
-pin_run_as_build:
-  boost: x.x
-  python: x.x
+  - 3.7

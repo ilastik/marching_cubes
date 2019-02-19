@@ -24,9 +24,9 @@ requirements:
     - boost {{ boost }}
     - pybind11
   run:
-    - python
-    - boost
-    - {{ pin_compatible("numpy") }}
+    - python {{ python }}
+    - boost {{ boost }}
+    - numpy >=1.12
 
 test:
   imports:
