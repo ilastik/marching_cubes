@@ -1,6 +1,9 @@
 Marching cubes implementation for the volumina 3D viewer [WIP]
 ==============================================================
 
+[![Build status](https://ci.appveyor.com/api/projects/status/xqo5wl6d1bgxygli/branch/master?svg=true)](https://ci.appveyor.com/project/k-dominik/marching-cubes/branch/master)
+[![Build Status](https://travis-ci.org/ilastik/marching_cubes.svg?branch=master)](https://travis-ci.org/ilastik/marching_cubes)
+
 Creates a 3D iso surface from a 3D volume.
 
 Why not these?
