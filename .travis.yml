@@ -1,0 +1,38 @@
+language: generic
+os:
+  - linux
+  - osx
+env:
+  global:
+    - CONDA_ROOT=$HOME/miniconda
+    - TEST_ENV=test-env
+    - TEST_ENV_PREFIX=$CONDA_ROOT/envs/$TEST_ENV
+    - NOSETEST_OUT_DIR=${CIRCLE_ARTIFACTS}/lazyflow-nose
+
+cache:
+  directories:
+    - CONDA_ROOT
+
+install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then export MINICONDA=https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export MINICONDA=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh; fi
+  - echo $CONDA_ROOT
+  - echo $TEST_ENV
+  - echo $TEST_ENV_PREFIX
+  - if [[ ! -d ${CONDA_ROOT} ]]; then
+      echo "Installing Miniconda...";
+      wget $MINICONDA -O miniconda.sh &&
+      bash miniconda.sh -b -p ${CONDA_ROOT};
+    else
+      echo "Using cached Miniconda install";
+    fi
+  - echo ". $CONDA_ROOT/etc/profile.d/conda.sh" >> ~/.bashrc
+  - source ~/.bashrc
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda install -c conda-forge conda-build
+
+script:
+  - conda build -c conda-forge conda-recipe
