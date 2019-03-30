@@ -7,7 +7,7 @@ class ImportTest(TestCase):
             import marching_cubes
         except ImportError as e:
             self.fail(e)
-    
+
     def test_function(self):
         try:
             from marching_cubes import march
