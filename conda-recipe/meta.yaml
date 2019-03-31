@@ -39,6 +39,12 @@ requirements:
 test:
   imports:
     - marching_cubes
+  requires:
+    - pytest
+  source_files:
+    - test/*
+  commands:
+    - pytest test/test_marching_regression.py
 
 about:
   home: http://ilastik.org
