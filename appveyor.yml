@@ -1,0 +1,20 @@
+clone_folder: c:\projects\marching_cubes
+
+environment:
+  ENV_NAME: test-env
+  # set miniconda version explicitly
+  MINICONDA: C:\Miniconda36-x64
+
+install:
+  - set DEV_PREFIX=%MINICONDA%/envs/%ENV_NAME%
+  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda install -c conda-forge conda-build
+build: off
+
+test_script:
+  - conda build -c conda-forge conda-recipe
+
+# on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))

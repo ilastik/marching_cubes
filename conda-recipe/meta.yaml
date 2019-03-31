@@ -10,6 +10,10 @@ package:
 
 source:
   path: ../
+  patches:
+    # Can be removed once opemmp implementation used on windows accepts size_t
+    # in loops.
+    - 0001-ssize_t-in-parallel-fors-for-windows.patch  # [win]
 
 build:
   number: 0
@@ -35,6 +39,12 @@ requirements:
 test:
   imports:
     - marching_cubes
+  requires:
+    - pytest
+  source_files:
+    - test/*
+  commands:
+    - pytest test
 
 about:
   home: http://ilastik.org

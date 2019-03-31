@@ -37,7 +37,7 @@ Adjacency adjacencyList(Mesh& mesh)
 
 
 	//#pragma omp parallel for
-	for (int i = 0; i < faceCount * 3; i += 3)
+	for (size_t i = 0; i < faceCount * 3; i += 3)
 	{
 		//#pragma omp critical
 		{
@@ -74,7 +74,7 @@ void smooth(Mesh& mesh, unsigned int rounds)
 	for (unsigned int i = 0; i < rounds; ++i)
 	{
 		#pragma omp parallel for
-		for (int vert = 0; vert < vertexCount; ++vert)
+		for (size_t vert = 0; vert < vertexCount; ++vert)
 		{
 			for (unsigned int off = 0; off < 3; ++off)
 			{
