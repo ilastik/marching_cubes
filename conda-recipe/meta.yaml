@@ -44,7 +44,7 @@ test:
   source_files:
     - test/*
   commands:
-    - pytest test/test_marching_regression.py
+    - pytest test
 
 about:
   home: http://ilastik.org

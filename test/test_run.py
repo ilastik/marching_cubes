@@ -1,5 +1,6 @@
 from marching_cubes import march
 from numpy import load
+import os
 import time
 
 from pyqtgraph.opengl import GLViewWidget, MeshData
@@ -7,10 +8,8 @@ from pyqtgraph.opengl.items.GLMeshItem import GLMeshItem
 
 from PyQt5.QtGui import QApplication
 
-try:
-    volume = load("test/sample.npy")
-except IOError:
-    volume = load("sample.npy")
+
+volume = load(os.path.join(os.path.split(__file__)[0], 'data/input/sample.npy'))
 
 
 t0 = time.time()
