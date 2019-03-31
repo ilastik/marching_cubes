@@ -626,7 +626,7 @@ void calculateNormals(Mesh& mesh)
 	}
 
 	#pragma omp parallel for
-	for (int i = 0; i < triangleCount; ++i) {
+	for (size_t i = 0; i < triangleCount; ++i) {
 		Point vec1, vec2, normal;
 		size_t id0, id1, id2;
 		id0 = triangles[i * 3];
@@ -656,7 +656,7 @@ void calculateNormals(Mesh& mesh)
 	}
 
 	#pragma omp parallel for
-	for (int i = 0; i < vertexCount; ++i) {
+	for (size_t i = 0; i < vertexCount; ++i) {
 		float length = sqrt(normals[i][0] * normals[i][0] + normals[i][1] * normals[i][1] + normals[i][2] * normals[i][2]);
 		if (length > 0.) {
 			normals[i][0] /= length;

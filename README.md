@@ -1,5 +1,8 @@
-Marching cubes implementation for the volumina 3D viewer [WIP]
-==============================================================
+Marching cubes implementation for the volumina 3D viewer
+========================================================
+
+[![Build status](https://ci.appveyor.com/api/projects/status/xqo5wl6d1bgxygli/branch/master?svg=true)](https://ci.appveyor.com/project/k-dominik/marching-cubes/branch/master)
+[![Build Status](https://travis-ci.org/ilastik/marching_cubes.svg?branch=master)](https://travis-ci.org/ilastik/marching_cubes)
 
 Creates a 3D iso surface from a 3D volume.
 
@@ -31,7 +34,7 @@ __Mesh generation:__
 from marching_cubes import march
 from numpy import load
 
-volume = load("test/sample.npy")  # 128x128x128 uint8 volume
+volume = load("test/data/input/sample.npy")  # 128x128x128 uint8 volume
 
 # extract the mesh where the values are larger than or equal to 1
 # everything else is ignored
