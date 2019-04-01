@@ -1,7 +1,7 @@
 if [[ $(uname) == 'Darwin' ]]; then
-    CXXFLAGS="${CFLAGS} -std=c++11 -stdlib=libc++"
+    CXXFLAGS="${CXXFLAGS} -std=c++11 -stdlib=libc++"
 else
-    CXXFLAGS="${CFLAGS} -std=c++11"
+    CXXFLAGS="${CXXFLAGS} -std=c++11"
 fi
 
 mkdir build

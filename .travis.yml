@@ -1,7 +1,12 @@
 language: generic
-os:
-  - linux
-  - osx
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+    - os: osx
+      osx_image: xcode6.4
+
 env:
   global:
     - CONDA_ROOT=$HOME/miniconda
