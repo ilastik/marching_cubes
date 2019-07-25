@@ -25,7 +25,7 @@ requirements:
     - {{ compiler("cxx") }}
   host:
     - python {{ python }}
-    - boost {{ boost }}
+    - boost-cpp {{ boost }}
     - pybind11
   run:
     - python {{ python }}
