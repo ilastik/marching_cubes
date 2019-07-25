@@ -16,7 +16,7 @@ source:
     - 0001-ssize_t-in-parallel-fors-for-windows.patch  # [win]
 
 build:
-  number: 1000
+  number: 1001
   string: py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
 
 requirements:
@@ -25,11 +25,10 @@ requirements:
     - {{ compiler("cxx") }}
   host:
     - python {{ python }}
-    - boost {{ boost }}
+    - boost-cpp {{ boost }}
     - pybind11
   run:
     - python {{ python }}
-    - boost {{ boost }}
     - numpy >=1.12
 
 test:
