@@ -1,3 +1,5 @@
+# have to use Visual Studio 2017 for now
+# 2019 version doesn't have compiler tools for older versions installed (on Appveyor)
 image: Visual Studio 2017
 
 clone_folder: c:\projects\marching_cubes
@@ -8,6 +10,9 @@ environment:
   MINICONDA: C:\Miniconda36-x64
 
 install:
+  - >
+    "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat"
+    x64 -vcvars_ver=14.1
   - set DEV_PREFIX=%MINICONDA%/envs/%ENV_NAME%
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - conda config --set always_yes yes --set changeps1 no
