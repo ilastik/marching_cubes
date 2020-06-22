@@ -94,8 +94,6 @@ void smooth(Mesh& mesh, unsigned int rounds)
 		swap(normals, new_norms);
 		swap(vertices, new_verts);
 	}
-	swap(normals, new_norms);
-	swap(vertices, new_verts);
 	delete[] new_norms;
 	delete[] new_verts;
 	mesh.normals = normals;
