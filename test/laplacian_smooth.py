@@ -5,8 +5,6 @@ def laplacian_smooth(vertices, faces, rounds=1):
     """
     Pure-python reference implementation of laplacian smoothing.
 
-    Smooth the mesh in-place.
-
     This is simplest mesh smoothing technique, known as Laplacian Smoothing.
     Relocates each vertex by averaging its position with those of its adjacent neighbors.
     Repeat for N iterations.
@@ -42,7 +40,7 @@ def laplacian_smooth(vertices, faces, rounds=1):
 
         (Such meshes are not usually produced by marching cubes, though.)
     """
-    vertices = np.asarray(vertices, dtype=np.float32)
+    vertices = np.array(vertices, dtype=np.float32)
     faces = np.asarray(faces)
 
     # Compute the list of all unique vertex adjacencies
