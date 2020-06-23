@@ -36,6 +36,7 @@ test:
     - marching_cubes
   requires:
     - pytest
+    - pandas
   source_files:
     - test/*
   commands:
