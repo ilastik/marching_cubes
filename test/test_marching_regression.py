@@ -5,10 +5,19 @@ import os
 
 from laplacian_smooth import laplacian_smooth
 
+
 @pytest.fixture
 def volume():
     vol_path = os.path.join(os.path.split(__file__)[0], "data/input/sample.npy")
-    return np.load(vol_path)
+    data_c_order = np.load(vol_path)
+    # a little history lesson:
+    # in the past, march would just "expect" the data to be in F-order
+    # test data is in C-order, reference-data was generated with the data as is.
+    # Effectively the data was seen transposed.
+    # When the F-ordering issue was fixed, this data was suddenly "correctly"
+    # picked up as C-order -> result was slightly different. In order to
+    # emulate the old test, the data has to be transposed.
+    return data_c_order.T
 
 
 @pytest.fixture
@@ -40,6 +49,21 @@ def test_regression(volume, mesh_loader, smoothing, reference_mesh_file):
     np.testing.assert_array_almost_equal(vertices, ref_vertices)
     np.testing.assert_array_almost_equal(normals, ref_normals)
     assert (faces == ref_faces).all()
+
+
+def test_c_and_f_order_agnostic(volume):
+    # take a assymetric volume
+    shape_z, shape_y, shape_x = volume.shape
+    vol_c = np.ascontiguousarray(volume[0:shape_z // 2, 0:shape_y // 3, 0:shape_x // 5])
+    assert len(np.unique(vol_c.shape)) == len(vol_c.shape)
+    assert vol_c.flags['C_CONTIGUOUS']
+    vol_f = np.copy(vol_c, order="f")
+
+    mesh_data_c = marching_cubes.march(vol_c, 0)
+    mesh_data_h = marching_cubes.march(vol_f, 0)
+
+    for a, b in zip(mesh_data_c, mesh_data_h):
+        assert (a == b).all()
 
 
 def test_smoothing(volume):
