@@ -18,7 +18,7 @@ namespace marching_cubes
 
     std::tuple<py::array, py::array, py::array> 
     marching_cubes_glue(
-        py::array_t<int> volume,
+        py::array_t<int, , py::array::f_style > volume,
         int smooth_rounds
     )
     {
