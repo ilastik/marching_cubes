@@ -15,6 +15,7 @@ __0.3__:
    A workaround was to supply `volume.T` with C-order data to `march`.
    This should not be done anymore.
    `march` works with C- and F-order data now.
+
 __0.2__:
  * fixed number of smoothing rounds off by one error (#23)
    *Note:* in order to get consistent results with older versions, you'll have to decrement the number of smoothing rounds by `1`.
