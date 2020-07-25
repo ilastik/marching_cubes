@@ -58,6 +58,7 @@ def test_c_and_f_order_agnostic(volume):
     assert len(np.unique(vol_c.shape)) == len(vol_c.shape)
     assert vol_c.flags['C_CONTIGUOUS']
     vol_f = np.copy(vol_c, order="f")
+    assert vol_f.flags['F_CONTIGUOUS']
 
     mesh_data_c = marching_cubes.march(vol_c, 0)
     mesh_data_h = marching_cubes.march(vol_f, 0)
