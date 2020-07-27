@@ -19,7 +19,8 @@ namespace marching_cubes
     std::tuple<py::array, py::array, py::array> 
     marching_cubes_glue(
         py::array_t<int, py::array::f_style | py::array::forcecast > volume,
-        int smooth_rounds
+        int smooth_rounds,
+        int iso_level = ISO_LEVEL
     )
     {
         auto buffer = volume.request();
@@ -40,7 +41,7 @@ namespace marching_cubes
         const auto shape = volume.shape();
         {
             py::gil_scoped_release release;
-            mesh = march( volume_ptr, x_shape, y_shape, z_shape, ISO_LEVEL);
+            mesh = march( volume_ptr, x_shape, y_shape, z_shape, iso_level);
         }
 
         if (smooth_rounds > 0)
