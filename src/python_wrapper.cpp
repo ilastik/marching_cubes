@@ -9,9 +9,8 @@
 
 namespace py = pybind11;
 
-
-const int ISO_LEVEL = 1;
-
+const int DEFAULT_SMOOTH_ROUNDS = 0;
+const int DEFAULT_ISO_LEVEL = 1;
 
 namespace marching_cubes
 {
@@ -19,8 +18,8 @@ namespace marching_cubes
     std::tuple<py::array, py::array, py::array> 
     marching_cubes_glue(
         py::array_t<int, py::array::f_style | py::array::forcecast > volume,
-        int smooth_rounds,
-        int iso_level = ISO_LEVEL
+        int smooth_rounds = DEFAULT_SMOOTH_ROUNDS,
+        int iso_level = DEFAULT_ISO_LEVEL
     )
     {
         auto buffer = volume.request();
@@ -76,5 +75,11 @@ namespace marching_cubes
 }
 
 PYBIND11_MODULE(marching_cubes,m) {
-	m.def("march", &marching_cubes::marching_cubes_glue, "Marching cubes implementation");
+	m.def(
+        "march",
+        &marching_cubes::marching_cubes_glue,
+        "Marching cubes implementation",
+        py::arg("smooth_rounds") = DEFAULT_SMOOTH_ROUNDS,
+        py::arg("iso_level") = DEFAULT_ISO_LEVEL
+    );
 }
