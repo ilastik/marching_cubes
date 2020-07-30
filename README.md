@@ -6,22 +6,6 @@ Marching cubes implementation for the volumina 3D viewer
 
 Creates a 3D iso surface from a 3D volume.
 
-
-Release Notes:
---------------
-__0.3__:
- * fixed fortran order expectation (#26)
-   *Note:* previously data was expected in fortran order.
-   A workaround was to supply `volume.T` with C-order data to `march`.
-   This should not be done anymore.
-   `march` works with C- and F-order data now.
-
-__0.2__:
- * fixed number of smoothing rounds off by one error (#23)
-   *Note:* in order to get consistent results with older versions, you'll have to decrement the number of smoothing rounds by `1`.
-   So instead of e.g. `march(volume, 4)`, go for `march(volume, 3)`.
-
-
 Why not these?
 --------------
 
@@ -32,6 +16,11 @@ Why not these?
     1. huge dependency
     2. does not support python3.x
 
+Installation in python
+--------------
+```sh
+conda install -c ilastik-forge -c conda-forge marching_cubes
+```
 
 Example usage
 -------------
@@ -93,9 +82,17 @@ __3 smoothing rounds__
 ![3 smoothing rounds](https://raw.githubusercontent.com/ilastik/marching_cubes/master/test/image_smooth.png)
 
 
-This library is work in progress
---------------------------------
+Release Notes:
+--------------
 
-__Todo:__
+__0.3__:
+ * fixed fortran order expectation (#26)
+   *Note:* previously data was expected in fortran order.
+   A workaround was to supply `volume.T` with C-order data to `march`.
+   This should not be done anymore.
+   `march` works with C- and F-order data now.
 
-* repair workaround for volumes with different shapes
+__0.2__:
+ * fixed number of smoothing rounds off by one error (#23)
+   *Note:* in order to get consistent results with older versions, you'll have to decrement the number of smoothing rounds by `1`.
+   So instead of e.g. `march(volume, 4)`, go for `march(volume, 3)`.
