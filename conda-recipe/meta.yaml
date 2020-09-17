@@ -1,3 +1,7 @@
+{% if not GIT_DESCRIBE_NUMBER is defined %}
+  {% set GIT_DESCRIBE_NUMBER = 0 %}
+{% endif %}
+
 package:
     name: marching_cubes
 
