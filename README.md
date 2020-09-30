@@ -22,7 +22,7 @@ __0.2__:
    So instead of e.g. `march(volume, 4)`, go for `march(volume, 3)`.
 
 
-Why not these?
+Why not these? (time of writing July 2016)
 --------------
 
 - `skimage`
@@ -31,6 +31,8 @@ Why not these?
 - `vtk`
     1. huge dependency
     2. does not support python3.x
+
+    _update: vtk started supporting Python 3.2-3.5 with version 7, Python 3.5-3.8 with version 9_
 
 
 Example usage
