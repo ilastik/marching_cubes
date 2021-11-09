@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include <cstddef>
 
 typedef float Point[3];
 

@@ -26,6 +26,7 @@ build:
 requirements:
   build:
     - cmake
+    - make  # [not win]
     - {{ compiler("cxx") }}
   host:
     - python
