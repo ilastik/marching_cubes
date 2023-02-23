@@ -27,17 +27,17 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         shell: bash -l {0}
         run: |
-          conda install -n base -c conda-forge conda-build -y
-          xvfb-run conda build -c conda-forge conda-recipe
+          conda install -n base -c conda-forge conda-build mamba boa conda-verify -y
+          xvfb-run conda mambabuild -c conda-forge conda-recipe
       - name: osx conda build test
         if: matrix.os == 'macos-latest'
         shell: bash -l {0}
         run: |
-          conda install -n base -c conda-forge conda-build -y
-          conda build -c conda-forge conda-recipe
+          conda install -n base -c conda-forge conda-build mamba boa conda-verify -y
+          conda mambabuild -c conda-forge conda-recipe
       - name: windows conda build test
         if: matrix.os == 'windows-latest'
         shell: cmd /C CALL {0}
         # auto activation of env does not seem to work on win
         run: |
-          conda install -n base -c conda-forge conda-build -y & conda build -c conda-forge conda-recipe
+          conda install -n base -c conda-forge conda-build mamba boa conda-verify -y & conda mambabuild -c conda-forge conda-recipe
