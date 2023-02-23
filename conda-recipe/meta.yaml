@@ -32,9 +32,11 @@ requirements:
     - python
     - boost-cpp {{ boost }}
     - pybind11
+    - llvm-openmp
   run:
     - {{ pin_compatible("python") }}
     - numpy >=1.12
+    - llvm-openmp
 
 test:
   imports:
