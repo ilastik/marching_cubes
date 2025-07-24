@@ -25,13 +25,14 @@ build:
 
 requirements:
   build:
-    - cmake
+    - cmake >=3.5
     - make  # [not win]
     - {{ compiler("cxx") }}
   host:
     - python
-    - boost-cpp {{ boost }}
+    - libboost-devel
     - pybind11
+    - setuptools
   run:
     - {{ pin_compatible("python") }}
     - numpy >=1.12
