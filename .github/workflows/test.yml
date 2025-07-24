@@ -23,6 +23,10 @@ jobs:
           auto-update-conda: true
           auto-activate-base: true
           activate-environment: ""
+          channel-priority: strict
+          miniforge-version: latest
+          conda-solver: libmamba
+          conda-remove-defaults: true
       - name: linux conda build test
         if: matrix.os == 'ubuntu-latest'
         shell: bash -l {0}
