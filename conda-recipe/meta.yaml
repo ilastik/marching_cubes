@@ -22,18 +22,23 @@ source:
 build:
   number: 0
   string: py{{CONDA_PY}}_{{PKG_BUILDNUM}}_h{{PKG_HASH}}_g{{GIT_FULL_HASH[:7]}}
+  ignore_run_exports_from:
+    # need to find CMake data at build time, but no linkage
+    - libboost-devel
+
 
 requirements:
   build:
-    - cmake
+    - cmake >=3.5
     - make  # [not win]
     - {{ compiler("cxx") }}
   host:
     - python
-    - boost-cpp {{ boost }}
+    - libboost-devel
     - pybind11
+    - setuptools
   run:
-    - {{ pin_compatible("python") }}
+    - python
     - numpy >=1.12
 
 test:

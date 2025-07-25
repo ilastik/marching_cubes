@@ -2,12 +2,14 @@ MACOSX_DEPLOYMENT_TARGET:      # [osx]
   - 11.0                       # [osx and arm64]
   - 10.9                       # [osx and x86_64]
 
-boost:
-  - 1.74.0
+libboost_devel:
+  - 1.88
 python:
-  - 3.7  # [not (osx and arm64)]
-  - 3.8
   - 3.9
+  - 3.10
+  - 3.11
+  - 3.12
+  - 3.13
 
 pin_run_as_build:
   python:

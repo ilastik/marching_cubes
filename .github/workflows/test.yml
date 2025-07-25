@@ -13,6 +13,8 @@ jobs:
         os: [macos-latest, windows-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
+      - uses: ilammy/msvc-dev-cmd@v1
+        if: matrix.os == 'windows-latest'
       - name: checkout
         uses: actions/checkout@v4
         with:
@@ -23,6 +25,10 @@ jobs:
           auto-update-conda: true
           auto-activate-base: true
           activate-environment: ""
+          channel-priority: strict
+          miniforge-version: latest
+          conda-solver: libmamba
+          conda-remove-defaults: true
       - name: linux conda build test
         if: matrix.os == 'ubuntu-latest'
         shell: bash -l {0}
