@@ -16,7 +16,7 @@ jobs:
       - uses: ilammy/msvc-dev-cmd@v1
         if: matrix.os == 'windows-latest'
       - name: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: setup conda
